@@ -31,6 +31,10 @@ func init() {
 	viper.SetDefault(configVideoGamma, gammaDef)
 	registerOnConfigRead(func() {
 		setGamma(float32(viper.GetFloat64(configVideoGamma)))
+		guiOptionsRes = image.Point{
+			X: viper.GetInt(configVideoWidth),
+			Y: viper.GetInt(configVideoHeight),
+		}
 	})
 }
 
@@ -74,6 +78,11 @@ func getResolutionOptions() []image.Point {
 
 func nox_video_setMenuOptions(root *gui.Window) {
 	mode := noxClient.videoGetGameMode()
+	// Leaving the options menu applies guiOptionsRes; keep the current mode unless the user picks another one,
+	// otherwise custom resolutions (not in the list) are reset to the default on every visit.
+	if mode.X > 0 && mode.Y > 0 {
+		guiOptionsRes = mode
+	}
 	for i, res := range getResolutionOptions() {
 		if res == (image.Point{}) {
 			continue
