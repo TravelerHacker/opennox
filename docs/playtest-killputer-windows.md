@@ -49,5 +49,6 @@ Double-click **OpenNox Playtest** on the desktop, or run `Launch-OpenNox-HD.ps1`
 ## What to verify
 
 - Options menu no longer resets custom resolution (PR #1 on this fork).
+- If keyboard input dies after a cutscene, run console `unstick` or enable `extensions.input.auto_recover_stuck` (PR #7).
 - Campaign load, multiplayer join, and chat with non-ASCII characters if you use localized strings.
 - Compare FPS with in-game perf overlay; expect CPU-bound rendering at high resolutions.

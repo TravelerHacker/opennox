@@ -82,6 +82,10 @@ video:
   gamma: 1.0
   filtering: true
   stretch: false
+  # vsync: false   # requires vendored libs PR #4
+extensions:
+  input:
+    auto_recover_stuck: false  # set true if keyboard dies after cutscenes (#754); see docs/input-recovery.md
 "@ | Set-Content -Encoding UTF8 -Path $ConfigPath
 
 $launcher = Join-Path $PlaytestRoot "Launch-OpenNox-HD.ps1"
