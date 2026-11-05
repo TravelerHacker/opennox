@@ -316,7 +316,8 @@ func guiCloseNPCDialog() {
 	legacy.Dialogs.Sub_44D8F0()
 	legacy.Set_dword_5d4594_1123520(0)
 	if !nox_client_renderGUI_80828 && memmap.Uint32(0x587000, 153436) == 1 {
-		nox_client_renderGUI_80828 = true
+		enableGUIDrawing(true)
+		legacy.Sub_437100()
 	}
 }
 

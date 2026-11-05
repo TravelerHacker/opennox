@@ -113,6 +113,18 @@ func guiEnhanceInputCfg(root *gui.Window) {
 	if w := root.ChildByID(932); w != nil {
 		w.DrawData().SetText("Apply")
 	}
+	// Long action titles (e.g. "Invert Spell Target (manual cast)") need taller rows (#737).
+	const minLineHeight = 14
+	for _, id := range []uint{911, 912, 913} {
+		w := root.ChildByID(id)
+		if w == nil || !w.DrawData().Style.IsScrollListBox() || w.WidgetData == nil {
+			continue
+		}
+		data := (*gui.ScrollListBoxData)(w.WidgetData)
+		if data.Line_height < minLineHeight {
+			data.Line_height = minLineHeight
+		}
+	}
 }
 
 func guiEnhanceOptions(root *gui.Window) {

@@ -95,6 +95,7 @@ func (c *Client) nox_xxx_client_435F80_draw() bool {
 		nox_xxx_setContinueMenuOrHost_43DDD0(0)
 		return false
 	}
+	clientMaybeAutoRecoverStuckInput()
 	legacy.Sub_437100()
 	if legacy.Sub_478030() == 0 && nox_xxx_guiCursor_477600() == 0 {
 		legacy.Sub_470DE0()
