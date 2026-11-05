@@ -9,6 +9,7 @@ import (
 	"github.com/spf13/viper"
 	"github.com/tawesoft/golib/v2/dialog"
 
+	"github.com/opennox/libs/client/seat"
 	"github.com/opennox/libs/client/seat/sdl"
 	"github.com/opennox/libs/env"
 
@@ -18,12 +19,17 @@ import (
 	"github.com/opennox/opennox/v1/legacy"
 )
 
+const configVideoVsync = "video.vsync"
+
 func init() {
 	viper.SetDefault(configVideoFiltering, true)
 	viper.SetDefault(configVideoStretch, false)
+	viper.SetDefault(configVideoVsync, false)
 }
 
 func (c *Client) initSeat(sz image.Point) error {
+	seat.VideoVsync = viper.GetBool(configVideoVsync)
+	seat.VideoStreamUpload = true
 	sst, err := sdl.New(c.Log, "OpenNox "+version.ClientVersion(), sz)
 	if err != nil {
 		return err
