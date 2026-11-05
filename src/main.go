@@ -371,10 +371,12 @@ func runArgs(args []string, loopFunc func() error) (gerr error) {
 	if env.IsE2E() {
 		noxClient.videoSetGameMode(image.Point{X: 1024, Y: 768})
 	} else {
-		noxClient.videoSetGameMode(image.Point{
+		mode := image.Point{
 			X: viper.GetInt(configVideoWidth),
 			Y: viper.GetInt(configVideoHeight),
-		})
+		}
+		noxClient.videoSetGameMode(mode)
+		guiOptionsRes = mode
 	}
 	if err := gameexReadConfig("game_ex.cfg"); err != nil {
 		return fmt.Errorf("failed to load gameex config file: %w", err)
