@@ -43,7 +43,7 @@ func sub_526CA0(a1 string) int {
 }
 
 func nox_xxx_wall_42A6C0(a1 uint8, a2 uint8) uint8 {
-	return memmap.Uint8(0x587000, uintptr(a1)*13+71276+uintptr(a2))
+	return memmap.Uint8(0x587000, 71276+13*uintptr(a1)+uintptr(a2))
 }
 
 func asWallS(p *server.Wall) *Wall {

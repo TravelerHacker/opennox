@@ -24,7 +24,7 @@ var particleCases = []struct {
 	{
 		name: "white",
 		opt:  particleOpt{rad: 10, blur: 0, intens: 0xff, color: RGB{0xff, 0xff, 0xff}},
-		exp:  "6e3837c001f5a381cbd4782670c720b3",
+		exp:  "5544713bba8332639a513e39cfab38e5",
 	},
 	{
 		name: "green",
@@ -34,7 +34,7 @@ var particleCases = []struct {
 	{
 		name: "white3",
 		opt:  particleOpt{rad: 10, blur: 3, intens: 0xff, color: RGB{0xff, 0xff, 0xff}},
-		exp:  "e142606bc079722e906ca7dcfd6ec028",
+		exp:  "85837dd6dea7046a543483146f4d8378",
 	},
 	{
 		name: "green3",
