@@ -498,6 +498,7 @@ func (c *Client) nox_draw_setCutSize(perc int, a2 int) {
 
 	vp.Size.X = vp.Screen.Dx() + 1
 	vp.Size.Y = vp.Screen.Dy() + 1
+	videoApplyWidescreenFOV(vp, bsz)
 	legacy.Set_dword_5d4594_1193188(1)
 	c.GUI.ValYYY = 1
 }
