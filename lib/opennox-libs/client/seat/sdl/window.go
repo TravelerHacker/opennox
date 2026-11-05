@@ -36,8 +36,9 @@ func New(log *slog.Logger, title string, sz image.Point) (*Window, error) {
 	if err := sdl.GLSetAttribute(sdl.GL_CONTEXT_MINOR_VERSION, 3); err != nil {
 		return nil, fmt.Errorf("cannot set OpenGL version: %w", err)
 	}
-	if err := sdl.GLSetAttribute(sdl.GL_CONTEXT_PROFILE_CORE, 1); err != nil {
-		return nil, fmt.Errorf("cannot set OpenGL core: %w", err)
+	// Profile must be set via GL_CONTEXT_PROFILE_MASK (see opennox/opennox#749).
+	if err := sdl.GLSetAttribute(sdl.GL_CONTEXT_PROFILE_MASK, sdl.GL_CONTEXT_PROFILE_CORE); err != nil {
+		return nil, fmt.Errorf("cannot set OpenGL core profile: %w", err)
 	}
 	if err := sdl.GLSetAttribute(sdl.GL_CONTEXT_FORWARD_COMPATIBLE_FLAG, 1); err != nil {
 		return nil, fmt.Errorf("cannot set OpenGL forward: %w", err)
