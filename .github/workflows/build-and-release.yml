@@ -56,10 +56,11 @@ jobs:
           retention-days: 1
 
   hybrid_docker_win7:
-    # Cross compile Windows binaries with downgraded Go toolkit
+    # Cross compile Windows binaries with downgraded Go toolkit.
+    # Disabled: OpenNox requires Go 1.25+; Win7 builds need a separate maintenance track.
     name: Cross compile for Windows (Win7 compatible)
     runs-on: ubuntu-latest
-    if: false # TODO
+    if: false
     steps:
       - uses: actions/checkout@v3
         with:

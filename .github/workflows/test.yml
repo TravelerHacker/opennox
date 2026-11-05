@@ -1,0 +1,38 @@
+name: Test
+
+on:
+  push:
+    branches: [dev, main, master, cursor/**]
+  pull_request:
+    branches: [dev, main, master]
+
+jobs:
+  test-pure-go:
+    name: Go tests (non-CGO packages)
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: src
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - uses: actions/setup-go@v5
+        with:
+          go-version: "1.25.x"
+          cache-dependency-path: src/go.sum
+
+      - name: List non-CGO packages
+        id: pkgs
+        run: |
+          pkgs=$(go list -f '{{if not .CgoEnabled}}{{.ImportPath}}{{end}}' ./... | grep -v '/internal/offalign$' | paste -sd ' ')
+          echo "packages=$pkgs" >> "$GITHUB_OUTPUT"
+
+      - name: go test
+        run: go test -count=1 ${{ steps.pkgs.outputs.packages }}
+
+      - name: govulncheck
+        run: |
+          go install golang.org/x/vuln/cmd/govulncheck@latest
+          govulncheck ./...
